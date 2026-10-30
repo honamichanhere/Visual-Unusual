@@ -2,6 +2,16 @@
 -- UI is built in this file (styled after Mugiwara UI); the Unusual logic is ported from Mugiwara HUB's
 -- Games/Evade/VisualUnusual.lua (and the rig lookup of Rigs.lua).
 
+-- Only runs in Evade (same place ids as Mugiwara HUB); in any other game nothing is loaded.
+local EVADE_PLACE_IDS = { [9872472334] = true, [99214917572799] = true, [10668472534] = true }
+if not EVADE_PLACE_IDS[game.PlaceId] then
+    warn("[Visual Unusual] This script only works in Evade.")
+    pcall(function()
+        game:GetService("StarterGui"):SetCore("SendNotification", { Title = "Visual Unusual", Text = "This script only works in Evade.", Duration = 6 })
+    end)
+    return
+end
+
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
